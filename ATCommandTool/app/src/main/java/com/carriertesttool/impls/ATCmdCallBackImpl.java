@@ -1,9 +1,11 @@
-package com.atcommandtool.com.atcommandtool.impls;
+package com.carriertesttool.impls;
 
 import android.content.Context;
 import android.widget.TextView;
+
+import com.carriertesttool.toolatcommand.IATCmdSend;
 import com.atcommandtool.com.atcommandtool.R;
-import com.atcommandtool.com.atcommandtool.atcommand.IATCmdSend;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 

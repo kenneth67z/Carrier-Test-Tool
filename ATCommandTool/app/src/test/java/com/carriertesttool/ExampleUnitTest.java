@@ -1,4 +1,4 @@
-package com.atcommandtool.com.atcommandtool;
+package com.carriertesttool;
 
 import org.junit.Test;
 

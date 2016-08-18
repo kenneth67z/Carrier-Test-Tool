@@ -1,23 +1,34 @@
 <resources>
     <string name="app_name">Carrier Test Tool</string>
     <string name="welcome_string">Welcome! \n\nPlease select a test tool for starting!</string>
+
     <string name="at_cmd_tool">AT Command Tool</string>
     <string name="at_cmd_txt">Please enter an AT command</string>
-    <string name="at_cmd_send">Send</string>
     <string name="at_cmd_send_complete_msg">AT Command send Complete.</string>
     <string name="at_cmd_is_null">The AT Command Message is NULL.</string>
     <string name="at_cmd_para_is_null">The AT Command Message Parameter is NULL.</string>
     <string name="at_cmd_msg_length_is_null">the AT Command Message Length is zero!!!</string>
     <string name="at_cmd_cbk_para_is_null">AT command callback parameter is null!!!</string>
     <string name="at_cmd_string">AT Command: </string>
+
+    <string name="shell_cmd_tool">Shell Command Tool</string>
+    <string name="shell_cmd_txt">Please enter an Shell command</string>
+    <string name="shell_cmd_send_complete_msg">Shell Command send Complete.</string>
+    <string name="shell_cmd_is_null">The Shell Command Message is NULL.</string>
+    <string name="shell_cmd_para_is_null">The Shell Command Message Parameter is NULL.</string>
+    <string name="shell_cmd_msg_length_is_null">the Shell Command Message Length is zero!!!</string>
+    <string name="shell_cmd_cbk_para_is_null">Shell command callback parameter is null!!!</string>
+    <string name="shell_cmd_string">Shell Command: </string>
+
     <string name="open_left_drawer">Open Drawer</string>
     <string name="close_left_drawer">Close Drawer</string>
 
+    <string name="send_str">Send</string>
     <string name="no_cmd">No Command</string>
     <string name="no_execute_msg">No Execute Message</string>
 
     <string-array name="drawer_menu">
         <item>AT Command Tool</item>
-        <item>Test</item>
+        <item>Shell Command Tool</item>
     </string-array>
 </resources>

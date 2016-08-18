@@ -1,4 +1,4 @@
-package com.atcommandtool.com.atcommandtool;
+package com.carriertesttool;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

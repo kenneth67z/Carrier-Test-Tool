@@ -1,4 +1,4 @@
-package com.atcommandtool.com.atcommandtool.fragment;
+package com.carriertesttool.fragment;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -11,9 +11,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.carriertesttool.impls.ATCmdCallBackImpl;
+import com.carriertesttool.toolatcommand.ATCommandSend;
 import com.atcommandtool.com.atcommandtool.R;
-import com.atcommandtool.com.atcommandtool.atcommand.ATCommandSend;
-import com.atcommandtool.com.atcommandtool.impls.ATCmdCallBackImpl;
+
 /**
  * Created by Admin on 2016/8/17.
  */
@@ -61,7 +63,7 @@ public class ATCommandFragment extends Fragment {
         btn.setOnClickListener(mTextClickListener);
 
         // To show the result for each sent AT Commands
-        TextView textView = (TextView)view.findViewById(R.id.text_result);
+        TextView textView = (TextView)view.findViewById(R.id.at_text_result);
         mATCmdCbk.setTextViewItem(textView);
 
         return view;

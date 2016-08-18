@@ -1,12 +1,12 @@
-package com.atcommandtool.com.atcommandtool.atcommand;
+package com.carriertesttool.toolatcommand;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-
 import com.atcommandtool.com.atcommandtool.R;
+
 /**
  * Created by Admin on 2016/8/17.
  */

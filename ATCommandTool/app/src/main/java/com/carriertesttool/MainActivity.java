@@ -1,4 +1,4 @@
-package com.atcommandtool.com.atcommandtool;
+package com.carriertesttool;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -15,8 +15,11 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.atcommandtool.com.atcommandtool.fragment.ATCommandFragment;
-import com.atcommandtool.com.atcommandtool.fragment.MainFragment;
+import com.carriertesttool.fragment.ShellCommandFragment;
+import com.atcommandtool.com.atcommandtool.R;
+import com.carriertesttool.fragment.ATCommandFragment;
+import com.carriertesttool.fragment.MainFragment;
+import com.carriertesttool.util.ToolConstants;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mLeftDrawer;
@@ -89,23 +92,28 @@ public class MainActivity extends AppCompatActivity {
     private void selectMenuItem(int position)
     {
         Fragment fragment = null;
+        ToolConstants.TOOL_TYPE selectItem = ToolConstants.TOOL_TYPE.values()[position];
+
         if(mPosition == position)
         {
             mLeftDrawer.closeDrawer(mLeftDrawerContent);
             return;
         }
 
-        switch (position)
+        switch (selectItem)
         {
-            case 0:
-                mPosition = 0;
+            case TOOL_AT_COMMAND:
+                mPosition = ToolConstants.TOOL_TYPE.TOOL_AT_COMMAND.ordinal();
                 ATCommandFragment atCommandF= new ATCommandFragment();
                 atCommandF.setContext(this);
                 fragment = atCommandF;
                 break;
 
-            case 1:
-                mPosition = 1;
+            case TOOL_SHELL_COMMAND:
+                mPosition = ToolConstants.TOOL_TYPE.TOOL_SHELL_COMMAND.ordinal();
+                ShellCommandFragment shellCommandF= new ShellCommandFragment();
+                shellCommandF.setContext(this);
+                fragment = shellCommandF;
                 break;
 
             default:
@@ -143,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
                 Fragment fragment = new MainFragment();
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+                getSupportActionBar().setTitle(R.string.app_name);
                 mPosition = -1;
             }
             else
