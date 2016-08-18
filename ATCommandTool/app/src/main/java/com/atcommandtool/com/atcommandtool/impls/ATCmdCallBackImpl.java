@@ -2,9 +2,10 @@ package com.atcommandtool.com.atcommandtool.impls;
 
 import android.content.Context;
 import android.widget.TextView;
-
 import com.atcommandtool.com.atcommandtool.R;
 import com.atcommandtool.com.atcommandtool.atcommand.IATCmdSend;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 /**
  * Created by Admin on 2016/8/17.
@@ -29,9 +30,29 @@ public class ATCmdCallBackImpl implements IATCmdSend
         *  @returns boolean true for success, false for failed.
         */
     @Override
-    public boolean ATCmdSend(String ATCmd)
+    public String ATCmdSend(String ATCmd)
     {
-        return true;
+        StringBuffer output = new StringBuffer();
+        String response;
+        Process process;
+
+        try {
+            process = Runtime.getRuntime().exec(ATCmd);
+            process.waitFor();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+            String line = "";
+            while ((line = reader.readLine())!= null) {
+                output.append(line + "\n");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        response = output.toString();
+
+
+        return response;
     }
 
     /**
@@ -39,7 +60,7 @@ public class ATCmdCallBackImpl implements IATCmdSend
          *  @returns void
         */
     @Override
-    public void ATCommandSendComplete(String ATCmd)
+    public void ATCommandSendComplete(String[] outputData)
     {
         if(null != mTextViewResult)
         {
@@ -51,7 +72,10 @@ public class ATCmdCallBackImpl implements IATCmdSend
                 .append("\n")
                 .append(mContext.getResources().getText(R.string.at_cmd_string))
                 .append(" ")
-                .append(ATCmd);
+                .append(outputData[0])
+                .append("\n\n")
+                .append("Command result:\n\n")
+                .append(outputData[1]);
             }
 
             mTextViewResult.setText(outputStr);

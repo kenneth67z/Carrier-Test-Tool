@@ -8,9 +8,13 @@
     <string name="at_cmd_is_null">The AT Command Message is NULL.</string>
     <string name="at_cmd_para_is_null">The AT Command Message Parameter is NULL.</string>
     <string name="at_cmd_msg_length_is_null">the AT Command Message Length is zero!!!</string>
+    <string name="at_cmd_cbk_para_is_null">AT command callback parameter is null!!!</string>
     <string name="at_cmd_string">AT Command: </string>
     <string name="open_left_drawer">Open Drawer</string>
     <string name="close_left_drawer">Close Drawer</string>
+
+    <string name="no_cmd">No Command</string>
+    <string name="no_execute_msg">No Execute Message</string>
 
     <string-array name="drawer_menu">
         <item>AT Command Tool</item>

@@ -23,6 +23,15 @@ public class ATCommandFragment extends Fragment {
     private ATCmdCallBackImpl mATCmdCbk = null;
     private Context mContext = null;
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mATCmdSend.release();
+        mTextClickListener = null;
+        mATCmdCbk = null;
+        mContext = null;
+    }
+
     public void setContext(Context context)
     {
         mContext = context;
@@ -38,6 +47,7 @@ public class ATCommandFragment extends Fragment {
         {
             mATCmdSend = ATCommandSend.getInstance();
         }
+        mATCmdSend.init();
         mATCmdSend.setCallback(mATCmdCbk);    // set the AT Command implement call back function
         mATCmdSend.setContext(mContext);        // it need context instance to get app resource
 
@@ -92,6 +102,7 @@ public class ATCommandFragment extends Fragment {
                     mATCmdSend.setProcessATCommand(mTtxt.getText().toString());
                     mATCmdSend.send();
                     mTtxt.clearFocus();
+                    mTtxt.setText("");
                     imm.hideSoftInputFromWindow(mTtxt.getWindowToken(),0);
                 }
                 else

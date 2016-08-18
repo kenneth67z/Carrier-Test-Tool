@@ -14,21 +14,27 @@
         android:focusable="true"
         android:focusableInTouchMode="true" >
 
-    <EditText android:id="@+id/at_cmd_msg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/at_cmd_txt" />
+        <EditText android:id="@+id/at_cmd_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/at_cmd_txt" />
 
-    <Button android:id="@+id/at_send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="@string/at_cmd_send" />
+        <Button android:id="@+id/at_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/at_cmd_send" />
 
-    <TextView android:id="@+id/text_result"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginTop="17dp"
-        android:background="@color/lightGray"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_marginTop="7dp"
+            android:background="@color/lightGray">
+
+            <TextView android:id="@+id/text_result"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </ScrollView>
+
     </LinearLayout>
 </RelativeLayout>
