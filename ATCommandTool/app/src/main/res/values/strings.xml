@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Carrier Test Tool</string>
+    <string name="welcome_string">Welcome! \n\nPlease select a test tool for starting!</string>
+    <string name="at_cmd_tool">AT Command Tool</string>
+    <string name="at_cmd_txt">Please enter an AT command</string>
+    <string name="at_cmd_send">Send</string>
+    <string name="at_cmd_send_complete_msg">AT Command send Complete.</string>
+    <string name="at_cmd_is_null">The AT Command Message is NULL.</string>
+    <string name="at_cmd_para_is_null">The AT Command Message Parameter is NULL.</string>
+    <string name="at_cmd_msg_length_is_null">the AT Command Message Length is zero!!!</string>
+    <string name="at_cmd_string">AT Command: </string>
+    <string name="open_left_drawer">Open Drawer</string>
+    <string name="close_left_drawer">Close Drawer</string>
+
+    <string-array name="drawer_menu">
+        <item>AT Command Tool</item>
+        <item>Test</item>
+    </string-array>
+</resources>
