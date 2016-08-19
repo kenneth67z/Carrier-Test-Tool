@@ -5,6 +5,7 @@
     <string name="at_cmd_tool">AT Command Tool</string>
     <string name="at_cmd_txt">Please enter an AT command</string>
     <string name="at_cmd_send_complete_msg">AT Command send Complete.</string>
+    <string name="at_cmd_send_failed_msg">AT Command send Failed!!!</string>
     <string name="at_cmd_is_null">The AT Command Message is NULL.</string>
     <string name="at_cmd_para_is_null">The AT Command Message Parameter is NULL.</string>
     <string name="at_cmd_msg_length_is_null">the AT Command Message Length is zero!!!</string>
@@ -12,8 +13,9 @@
     <string name="at_cmd_string">AT Command: </string>
 
     <string name="shell_cmd_tool">Shell Command Tool</string>
-    <string name="shell_cmd_txt">Please enter an Shell command</string>
+    <string name="shell_cmd_txt">Please enter a Shell command</string>
     <string name="shell_cmd_send_complete_msg">Shell Command send Complete.</string>
+    <string name="shell_cmd_send_failed_msg">AT Command send Failed!!!</string>
     <string name="shell_cmd_is_null">The Shell Command Message is NULL.</string>
     <string name="shell_cmd_para_is_null">The Shell Command Message Parameter is NULL.</string>
     <string name="shell_cmd_msg_length_is_null">the Shell Command Message Length is zero!!!</string>

@@ -7,14 +7,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-
 import com.carriertesttool.fragment.ShellCommandFragment;
 import com.atcommandtool.com.atcommandtool.R;
 import com.carriertesttool.fragment.ATCommandFragment;
@@ -24,21 +21,23 @@ import com.carriertesttool.util.ToolConstants;
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mLeftDrawer;
     private ListView mLeftDrawerList;
-    private LinearLayout mLeftDrawerContent;
     private ActionBarDrawerToggle mDrawerToggle;
     private String[] mDrawerMenu;
     private int mPosition = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Fragment fragment = null;
+        Fragment fragment;
 
         super.onCreate(savedInstanceState);
+
+        // initialize left drawer
         mDrawerMenu = this.getResources().getStringArray(R.array.drawer_menu);
         initActionBar();
         initDrawer();
         initDrawerList();
 
+        // init main view by using main fragment instead
         fragment = new MainFragment();
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
@@ -68,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
                 super.onDrawerClosed(view);
                 if(mPosition >= 0)
                     getSupportActionBar().setTitle(mDrawerMenu[mPosition]);
+                else
+                    getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
             }
         };
         mDrawerToggle.syncState();
@@ -77,8 +78,7 @@ public class MainActivity extends AppCompatActivity {
     private void initDrawerList(){
 
         mLeftDrawerList = (ListView) findViewById(R.id.left_drawer);
-        mLeftDrawerContent = (LinearLayout) findViewById(R.id.llv_left_drawer);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.left_drawer_menu_item, mDrawerMenu);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.left_drawer_menu_item, mDrawerMenu);
         mLeftDrawerList.setAdapter(adapter);
 
         mLeftDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(mPosition == position)
         {
-            mLeftDrawer.closeDrawer(mLeftDrawerContent);
+            mLeftDrawer.closeDrawer(GravityCompat.START);
             return;
         }
 
@@ -120,12 +120,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
-        if(null != fragment) {
-            FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-            mLeftDrawerList.setItemChecked(position, true);
-        }
-        mLeftDrawer.closeDrawer(mLeftDrawerContent);
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        mLeftDrawerList.setItemChecked(position, true);
+        mLeftDrawer.closeDrawer(GravityCompat.START);
     }
 
     private void initActionBar()
@@ -135,31 +133,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)
+    public void onBackPressed()
     {
-        if (keyCode == KeyEvent.KEYCODE_BACK)
+        // if current view not equal to main fragment, then back to main fragment.
+        if(mPosition > -1)
         {
-            if(mPosition != -1)
-            {
-                Fragment fragment = new MainFragment();
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-                getSupportActionBar().setTitle(R.string.app_name);
-                mPosition = -1;
-            }
-            else
-            {
-                return super.onKeyDown(keyCode, event);
-            }
+            Fragment fragment = new MainFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+            getSupportActionBar().setTitle(R.string.app_name);
+            mLeftDrawer.closeDrawer(GravityCompat.START);
+            mPosition = -1;
         }
-
-        return true;
+        else
+        {
+            // if the drawer is opening, close it.
+            if(mLeftDrawer.isDrawerOpen(GravityCompat.START))
+                mLeftDrawer.closeDrawer(GravityCompat.START);
+            else
+                super.onBackPressed();      // do the default back key behavior.
+        }
     }
 }
