@@ -5,7 +5,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin" >
+    android:paddingTop="@dimen/activity_vertical_margin">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,28 +14,17 @@
         android:focusable="true"
         android:focusableInTouchMode="true" >
 
-        <EditText android:id="@+id/at_cmd_msg"
+        <EditText android:id="@+id/auto_exe_phone_msg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textCapCharacters"
-            android:hint="@string/at_cmd_txt" />
+            android:inputType="phone"
+            android:hint="@string/auto_exe_phone_txt" />
 
-        <Button android:id="@+id/at_send"
+        <Button android:id="@+id/dial_call_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="@string/send_str" />
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_marginTop="7dp"
-            android:background="@color/lightGray">
-
-            <TextView android:id="@+id/at_text_result"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </ScrollView>
+            android:text="@string/auto_exe_phone_dial_call" />
 
     </LinearLayout>
 </RelativeLayout>

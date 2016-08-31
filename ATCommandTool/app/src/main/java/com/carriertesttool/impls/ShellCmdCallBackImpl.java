@@ -26,7 +26,7 @@ public class ShellCmdCallBackImpl implements IShellCmdSend {
 
     /**
      *  Implement the SHELL Command Send behavior.
-     *  @returns boolean true for success, false for failed.
+     *  @returns String output
      */
     @Override
     public String ShellCmdSend(String ShellCmd)
@@ -90,7 +90,7 @@ public class ShellCmdCallBackImpl implements IShellCmdSend {
     {
         if(null != mTextViewResult)
         {
-            mTextViewResult.setText("AT Command send Failed!!!\n");
+            mTextViewResult.setText(mContext.getResources().getText(R.string.shell_cmd_send_failed_msg) + "\n");
             mTextViewResult.setText(errorMsg);
         }
     }

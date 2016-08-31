@@ -14,15 +14,15 @@ import android.widget.TextView;
 import com.atcommandtool.com.atcommandtool.R;
 import com.carriertesttool.impls.ShellCmdCallBackImpl;
 import com.carriertesttool.toolshellcommand.ShellCommandSend;
+import com.carriertesttool.util.FragmentBase;
 
 /**
  * Created by Admin on 2016/8/18.
  */
-public class ShellCommandFragment extends Fragment {
-    private ShellCmdTxtOnClickListener mTextClickListener = new ShellCmdTxtOnClickListener();
+public class ShellCommandFragment extends FragmentBase {
+    private ShellCmdTxtOnClickListener mTextClickListener = null;
     private ShellCommandSend mShellCmdSend = ShellCommandSend.getInstance();
     private ShellCmdCallBackImpl mShellCmdCbk = null;
-    private Context mContext = null;
 
     @Override
     public void onDestroyView() {
@@ -30,27 +30,23 @@ public class ShellCommandFragment extends Fragment {
         mShellCmdSend.release();
         mTextClickListener = null;
         mShellCmdCbk = null;
-        mContext = null;
-    }
-
-    public void setContext(Context context)
-    {
-        mContext = context;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = initView(inflater, container);
+        View view = initView(inflater, container, R.layout.shell_command_tool);
+        Context context = getContext();
+        mTextClickListener = new ShellCmdTxtOnClickListener(context);
 
         // add Shell Command Interface to fragment
-        mShellCmdCbk = new ShellCmdCallBackImpl(mContext);
+        mShellCmdCbk = new ShellCmdCallBackImpl(context);
         if(mShellCmdSend == null)
         {
             mShellCmdSend = ShellCommandSend.getInstance();
         }
         mShellCmdSend.init();
         mShellCmdSend.setCallback(mShellCmdCbk);    // set the Shell Command implement call back function
-        mShellCmdSend.setContext(mContext);        // it need context instance to get app resource
+        mShellCmdSend.setContext(context);        // it need context instance to get app resource
 
         // EditText widget for typing the Shell Command
         EditText shellCmdText = (EditText)view.findViewById(R.id.shell_cmd_msg);
@@ -68,17 +64,14 @@ public class ShellCommandFragment extends Fragment {
         return view;
     }
 
-    private View initView(LayoutInflater inflater, ViewGroup container)
-    {
-        View view = inflater.inflate(R.layout.shell_command_tool, container, false);
-        return view;
-    }
-
     private class ShellCmdTxtOnClickListener implements View.OnClickListener
     {
         private EditText mTtxt = null;
-        public ShellCmdTxtOnClickListener()
+        private Context mContext = null;
+
+        public ShellCmdTxtOnClickListener(Context context)
         {
+            mContext = context;
         }
 
         public void setEditText(EditText txt)

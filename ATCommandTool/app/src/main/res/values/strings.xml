@@ -5,20 +5,35 @@
     <string name="at_cmd_tool">AT Command Tool</string>
     <string name="at_cmd_txt">Please enter an AT command</string>
     <string name="at_cmd_send_complete_msg">AT Command send Complete.</string>
+    <string name="at_cmd_send_failed_msg">AT Command send Failed!!!</string>
     <string name="at_cmd_is_null">The AT Command Message is NULL.</string>
     <string name="at_cmd_para_is_null">The AT Command Message Parameter is NULL.</string>
     <string name="at_cmd_msg_length_is_null">the AT Command Message Length is zero!!!</string>
     <string name="at_cmd_cbk_para_is_null">AT command callback parameter is null!!!</string>
     <string name="at_cmd_string">AT Command: </string>
+    <string name="at_cmd_default">usi_at_tool -b 115200 -i /dev/smd8 -c %1$s -w 3 -a</string>
+    <string name="at_cmd_prefix">AT</string>
 
     <string name="shell_cmd_tool">Shell Command Tool</string>
-    <string name="shell_cmd_txt">Please enter an Shell command</string>
+    <string name="shell_cmd_txt">Please enter a Shell command</string>
     <string name="shell_cmd_send_complete_msg">Shell Command send Complete.</string>
+    <string name="shell_cmd_send_failed_msg">AT Command send Failed!!!</string>
     <string name="shell_cmd_is_null">The Shell Command Message is NULL.</string>
     <string name="shell_cmd_para_is_null">The Shell Command Message Parameter is NULL.</string>
     <string name="shell_cmd_msg_length_is_null">the Shell Command Message Length is zero!!!</string>
     <string name="shell_cmd_cbk_para_is_null">Shell command callback parameter is null!!!</string>
     <string name="shell_cmd_string">Shell Command: </string>
+
+    <string name="auto_exe_phone_tool">Auto Execute Phone Tool</string>
+    <string name="auto_exe_phone_txt">Please enter a Phone Number</string>
+    <string name="auto_exe_phone_dial_call">Dial a Call</string>
+    <string name="auto_exe_phone_send_complete_msg">Dial Call Complete.</string>
+    <string name="auto_exe_phone_send_failed_msg">Dial Call Failed!!!</string>
+    <string name="auto_exe_phone_is_null">The Phone Number is NULL.</string>
+    <string name="auto_exe_phone_para_is_null">The Phone Number Parameter is NULL.</string>
+    <string name="auto_exe_phone_msg_length_is_null">the Phone Number Length is zero!!!</string>
+    <string name="auto_exe_phone_cbk_para_is_null">Dial Call callback parameter is null!!!</string>
+    <string name="auto_exe_phone_string">Phone Number: </string>
 
     <string name="open_left_drawer">Open Drawer</string>
     <string name="close_left_drawer">Close Drawer</string>
@@ -26,9 +41,14 @@
     <string name="send_str">Send</string>
     <string name="no_cmd">No Command</string>
     <string name="no_execute_msg">No Execute Message</string>
+    <string name="please_wait_msg">Please Wait...</string>
+    <string name="cmd_result_msg">Command result:</string>
+
+    <string name="error_context_is_null_msg">Context is Null!!!</string>
 
     <string-array name="drawer_menu">
         <item>AT Command Tool</item>
         <item>Shell Command Tool</item>
+        <item>Auto Execution Phone Tool</item>
     </string-array>
 </resources>

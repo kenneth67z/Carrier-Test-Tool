@@ -29,17 +29,19 @@ public class ATCmdCallBackImpl implements IATCmdSend
 
     /**
         *  Implement the AT Command Send behavior.
-        *  @returns boolean true for success, false for failed.
+        *  @returns String output
         */
     @Override
     public String ATCmdSend(String ATCmd)
     {
         StringBuffer output = new StringBuffer();
+        String ATSendCmdStr = mContext.getResources().getString(R.string.at_cmd_default);
         String response;
         Process process;
 
         try {
-            process = Runtime.getRuntime().exec(ATCmd);
+            ATSendCmdStr = String.format(ATSendCmdStr, ATCmd);
+            process = Runtime.getRuntime().exec(ATSendCmdStr);
             process.waitFor();
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
@@ -76,7 +78,8 @@ public class ATCmdCallBackImpl implements IATCmdSend
                 .append(" ")
                 .append(outputData[0])
                 .append("\n\n")
-                .append("Command result:\n\n")
+                .append(mContext.getResources().getText(R.string.cmd_result_msg))
+                .append("\n\n")
                 .append(outputData[1]);
             }
 
@@ -93,7 +96,7 @@ public class ATCmdCallBackImpl implements IATCmdSend
     {
         if(null != mTextViewResult)
         {
-            mTextViewResult.setText("AT Command send Failed!!!\n");
+            mTextViewResult.setText(mContext.getResources().getText(R.string.at_cmd_send_failed_msg) + "\n");
             mTextViewResult.setText(errorMsg);
         }
     }

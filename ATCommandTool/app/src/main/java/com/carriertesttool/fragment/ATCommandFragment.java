@@ -1,6 +1,5 @@
 package com.carriertesttool.fragment;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,15 +14,15 @@ import android.widget.TextView;
 import com.carriertesttool.impls.ATCmdCallBackImpl;
 import com.carriertesttool.toolatcommand.ATCommandSend;
 import com.atcommandtool.com.atcommandtool.R;
+import com.carriertesttool.util.FragmentBase;
 
 /**
  * Created by Admin on 2016/8/17.
  */
-public class ATCommandFragment extends Fragment {
-    private ATCmdTxtOnClickListener mTextClickListener = new ATCmdTxtOnClickListener();
+public class ATCommandFragment extends FragmentBase {
+    private ATCmdTxtOnClickListener mTextClickListener = null;
     private ATCommandSend mATCmdSend = ATCommandSend.getInstance();
     private ATCmdCallBackImpl mATCmdCbk = null;
-    private Context mContext = null;
 
     @Override
     public void onDestroyView() {
@@ -31,31 +30,31 @@ public class ATCommandFragment extends Fragment {
         mATCmdSend.release();
         mTextClickListener = null;
         mATCmdCbk = null;
-        mContext = null;
-    }
-
-    public void setContext(Context context)
-    {
-        mContext = context;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = initView(inflater, container);
+        View view = initView(inflater, container, R.layout.atcommand_tool);
+        Context context = getContext();
+
+        mTextClickListener = new ATCmdTxtOnClickListener(context);
 
         // add AT Command Interface to fragment
-        mATCmdCbk = new ATCmdCallBackImpl(mContext);
+        mATCmdCbk = new ATCmdCallBackImpl(context);
         if(mATCmdSend == null)
         {
             mATCmdSend = ATCommandSend.getInstance();
         }
         mATCmdSend.init();
         mATCmdSend.setCallback(mATCmdCbk);    // set the AT Command implement call back function
-        mATCmdSend.setContext(mContext);        // it need context instance to get app resource
+        mATCmdSend.setContext(context);        // it need context instance to get app resource
 
         // EditText widget for typing the AT Command
         EditText atCmdText = (EditText)view.findViewById(R.id.at_cmd_msg);
+        TextView textView = (TextView)view.findViewById(R.id.at_text_result);
         mTextClickListener.setEditText(atCmdText);
+        mTextClickListener.setTextView(textView);
+        atCmdText.setText(context.getString(R.string.at_cmd_prefix));
         atCmdText.setOnClickListener(mTextClickListener);
 
         // Button widget for sending a specify AT Command
@@ -63,28 +62,29 @@ public class ATCommandFragment extends Fragment {
         btn.setOnClickListener(mTextClickListener);
 
         // To show the result for each sent AT Commands
-        TextView textView = (TextView)view.findViewById(R.id.at_text_result);
         mATCmdCbk.setTextViewItem(textView);
 
         return view;
     }
 
-    private View initView(LayoutInflater inflater, ViewGroup container)
-    {
-        View view = inflater.inflate(R.layout.atcommand_tool, container, false);
-        return view;
-    }
-
     private class ATCmdTxtOnClickListener implements View.OnClickListener
     {
-        private EditText mTtxt = null;
-        public ATCmdTxtOnClickListener()
+        private EditText mEditText = null;
+        private TextView mTextView = null;
+        private Context mContext = null;
+
+        public ATCmdTxtOnClickListener(Context context)
         {
+            mContext = context;
         }
 
         public void setEditText(EditText txt)
         {
-            mTtxt = txt;
+            mEditText = txt;
+        }
+        public void setTextView(TextView txt)
+        {
+            mTextView = txt;
         }
 
         @Override
@@ -97,15 +97,17 @@ public class ATCommandFragment extends Fragment {
             }
             else if(view instanceof Button)
             {
-                if(null != mTtxt)
+                if(null != mEditText)
                 {
                     InputMethodManager imm = (InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
 
-                    mATCmdSend.setProcessATCommand(mTtxt.getText().toString());
+                    mATCmdSend.setProcessATCommand(mEditText.getText().toString());
                     mATCmdSend.send();
-                    mTtxt.clearFocus();
-                    mTtxt.setText("");
-                    imm.hideSoftInputFromWindow(mTtxt.getWindowToken(),0);
+                    mEditText.clearFocus();
+                    mEditText.setText(mContext.getString(R.string.at_cmd_prefix));
+
+                    mTextView.setText(mContext.getResources().getString(R.string.please_wait_msg));
+                    imm.hideSoftInputFromWindow(mEditText.getWindowToken(),0);
                 }
                 else
                 {
